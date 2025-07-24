@@ -1,7 +1,11 @@
 import React from "react";
 import { AiFillInstagram, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { SiLeetcode } from "react-icons/si";
+import { useForm, ValidationError } from '@formspree/react';
+
 const ContactSection = () => {
+  const [state, handleSubmit] = useForm("xpwldayp");
+
   return (
     <div
       data-aos="fade-left"
@@ -36,9 +40,6 @@ const ContactSection = () => {
               <a href="https://www.linkedin.com/in/arpit-krishna-028107209/" target="_blank" rel="noopener noreferrer" className='text-3xl text-white hover:text-blue-600 transition-all duration-300 ease-in-out'>
                   <AiFillLinkedin />
               </a>
-              {/* <a href="https://www.instagram.com/arpitkrishna_/" target="_blank" rel="noopener noreferrer" className='text-3xl text-pink-500 hover:text-purple-600 transition-all duration-300 ease-in-out'>
-                  <AiFillInstagram />
-              </a> */}
               <a href="https://leetcode.com/ArpitKrishna98/" target="_blank" rel="noopener noreferrer" className='text-3xl text-white hover:text-yellow-500 transition-all duration-300 ease-in-out'>
                   <SiLeetcode />
               </a>
@@ -48,38 +49,57 @@ const ContactSection = () => {
           </h2>
         </div>
         <div>
-          <form 
-          action="https://formspree.io/f/xpwldayp"
-          method="POST"
-          className="flex flex-col p-3">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Enter your name"
-              className="bg-transparent p-3 outline-none border focus:border-purple-500 focus:pl-8 transition-all duration-100 rounded-lg border-white gradient-text font-mon text-lg lg:text-2xl  mb-5 lg:mb-10 w-full lg:w-[30vw]"
-            />
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter your email"
-              className="bg-transparent p-3 outline-none border focus:border-purple-500 focus:pl-8 transition-all duration-100 rounded-lg border-white gradient-text font-mon text-lg lg:text-2xl  mb-5 lg:mb-10 w-full lg:w-[30vw]"
-            />
-            <textarea
-              name="message"
-              id="message"
-              rows="3"
-              className="bg-transparent p-3 outline-none border focus:border-purple-500 focus:pl-8 transition-all duration-100 rounded-lg border-white gradient-text font-mon text-lg lg:text-2xl  mb-5 lg:mb-10 w-full lg:w-[30vw]"
-              placeholder="Enter your message"
-            />
-            <button
-              type="submit"
-              className="px-3 py-2 text-lg lg:text-2xl bg-purple-500 hover:bg-purple-600 border font-bold text-white rounded-lg"
+          {state.succeeded ? (
+            <p className="text-2xl text-green-400 font-bold text-center">
+              Thanks for reaching out! I will get back to you soon.
+            </p>
+          ) : (
+            <form 
+              onSubmit={handleSubmit}
+              className="flex flex-col p-3"
             >
-              Send Message
-            </button>
-          </form>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+                className="bg-transparent p-3 outline-none border focus:border-purple-500 focus:pl-8 transition-all duration-100 rounded-lg border-white gradient-text font-mon text-lg lg:text-2xl  mb-5 lg:mb-10 w-full lg:w-[30vw]"
+              />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your email"
+                className="bg-transparent p-3 outline-none border focus:border-purple-500 focus:pl-8 transition-all duration-100 rounded-lg border-white gradient-text font-mon text-lg lg:text-2xl -mt-4 sm:-mt-3 mb-3 w-full lg:w-[30vw]"
+              />
+              <ValidationError 
+                prefix="Email" 
+                field="email"
+                errors={state.errors}
+                className="text-red-400 text-sm mb-4"
+              />
+              <textarea
+                name="message"
+                id="message"
+                rows="3"
+                className="bg-transparent p-3 outline-none border focus:border-purple-500 focus:pl-8 transition-all duration-100 rounded-lg border-white gradient-text font-mon text-lg lg:text-2xl  my-3 sm:-my-1 w-full lg:w-[30vw]"
+                placeholder="Enter your message"
+              />
+              <ValidationError 
+                prefix="Message" 
+                field="message"
+                errors={state.errors}
+                className="text-red-400 text-sm mb-4"
+              />
+              <button
+                type="submit"
+                className="px-3 py-2 text-lg lg:text-2xl bg-purple-500 hover:bg-purple-600 border font-bold text-white rounded-lg"
+                disabled={state.submitting}
+              >
+                Send Message
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>
