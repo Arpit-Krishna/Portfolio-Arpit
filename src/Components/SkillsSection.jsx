@@ -11,7 +11,12 @@ const skills = [
   { title: "Django", value: 70 },
   { title: "Python", value: 70 },
   { title: "My-SQL", value: 70 },
-  { title: "MongoDB", value: 35 }
+  { title: "MongoDB", value: 35 },
+  { title: "Hono.js", value: 40 },
+  { title: "TypeScript", value: 30 },
+  { title: "Docker-Containers", value: 60 },
+  { title: "Ether.js", value: 40 },
+  { title: "Web3", value: 40 },
 ]
 
 const SkillsSection = () => {
