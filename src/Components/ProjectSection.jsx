@@ -26,19 +26,28 @@ const projects = [
     liveLink: "https://habot-learning-support-provider.vercel.app/"
   },
   {
-    title: "ClimaTikka", 
-    description: "🌦️ ClimaTikka is a Django-based web app that uses APIs to provide real-time weather forecasting with location-based accuracy.",
-    image: "https://media.geeksforgeeks.org/wp-content/uploads/20240125180753/Screenshot-2024-01-25-125829.jpg",
-    github: "https://github.com/Arpit-Krishna/ClimaTikka/tree/main/WeathApp",
-    liveLink: "https://github.com/Arpit-Krishna/ClimaTikka/tree/main/WeathApp"
-  },
-  {
     title: "URL Shortener", 
     description: "A lightweight URL shortener with CRUD for shortened links, built with Node.js and Express, fully Docker containerized for easy deployment, and includes a dummy React frontend to test API endpoints seamlessly.",
     image: "https://i.ibb.co/Lhb8PJTw/Screenshot-2025-07-24-180209.png",
     github: "https://github.com/Arpit-Krishna/mini-url-shortener",
     liveLink: "https://github.com/Arpit-Krishna/mini-url-shortener"
   },
+  {
+    title: "Medi-Vault", 
+    description: "Medi-Vault is a Blockchain-based Electronic Health Record system enabling secure, patient-controlled medical data sharing using smart contracts and decentralized storage.",
+    image: "https://i.ibb.co/zvDtvm9/image.png",
+    github: "https://github.com/Arpit-Krishna/MediVault/",
+    liveLink: "https://github.com/Arpit-Krishna/MediVault/"
+  },
+  {
+    title: "ClimaTikka", 
+    description: "🌦️ ClimaTikka is a Django-based web app that uses APIs to provide real-time weather forecasting with location-based accuracy.",
+    image: "https://media.geeksforgeeks.org/wp-content/uploads/20240125180753/Screenshot-2024-01-25-125829.jpg",
+    github: "https://github.com/Arpit-Krishna/ClimaTikka/tree/main/WeathApp",
+    liveLink: "https://github.com/Arpit-Krishna/ClimaTikka/tree/main/WeathApp"
+  },
+
+  
 ]
 
 const ProjectSection = () => {

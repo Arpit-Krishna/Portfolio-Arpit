@@ -48,7 +48,10 @@ const ContactSection = () => {
           </h2>
         </div>
         <div>
-          <form className="flex flex-col p-3">
+          <form 
+          action="https://formspree.io/f/xpwldayp"
+          method="POST"
+          className="flex flex-col p-3">
             <input
               type="text"
               name="name"
