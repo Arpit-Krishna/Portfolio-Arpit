@@ -10,7 +10,7 @@ export default function RepoStars({ repo }) {
   if (status === "error" || !data || !data.stars) return null;
   return (
     <span className="inline-flex items-center gap-1 font-mono text-xs text-zinc-500" title="GitHub stars">
-      <Star size={13} weight="fill" className="text-amber-300/70" aria-hidden="true" />
+      <Star size={13} weight="fill" className="text-warn/70" aria-hidden="true" />
       <span className="tabular-nums">{data.stars}</span>
       <span className="sr-only">stars on GitHub</span>
     </span>

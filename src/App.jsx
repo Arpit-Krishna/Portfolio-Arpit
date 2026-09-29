@@ -1,10 +1,14 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import BootSequence from "./components/BootSequence";
+import ScrollProgress from "./components/ScrollProgress";
+import CommandConsole from "./components/CommandConsole";
+import { useTheme } from "./theme/ThemeContext";
 
 const CaseStudy = lazy(() => import("./pages/CaseStudy"));
 
@@ -39,7 +43,37 @@ function CaseStudyFallback() {
   );
 }
 
+const isTyping = (el) => el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
+
+// Global shortcuts: Ctrl/Cmd+K or "/" opens the terminal, "t" cycles the theme.
+function useShortcuts(openConsole, cycleTheme) {
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        openConsole();
+        return;
+      }
+      if (e.metaKey || e.ctrlKey || e.altKey || isTyping(document.activeElement)) return;
+      if (e.key === "/" || e.key === "`") {
+        e.preventDefault();
+        openConsole();
+      } else if (e.key.toLowerCase() === "t") {
+        cycleTheme();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openConsole, cycleTheme]);
+}
+
 export default function App() {
+  const [consoleOpen, setConsoleOpen] = useState(false);
+  const openConsole = useCallback(() => setConsoleOpen(true), []);
+  const closeConsole = useCallback(() => setConsoleOpen(false), []);
+  const { cycleTheme } = useTheme();
+  useShortcuts(openConsole, cycleTheme);
+
   return (
     <MotionConfig reducedMotion="user" transition={{ type: "spring", stiffness: 100, damping: 20 }}>
       <a
@@ -48,8 +82,10 @@ export default function App() {
       >
         Skip to content
       </a>
+      <BootSequence />
+      <ScrollProgress />
       <ScrollManager />
-      <Nav />
+      <Nav onOpenConsole={openConsole} />
       <main id="main">
         <Suspense fallback={<CaseStudyFallback />}>
           <Routes>
@@ -60,7 +96,9 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
+      <CommandConsole open={consoleOpen} onClose={closeConsole} />
       <div aria-hidden="true" className="grain" />
+      <div aria-hidden="true" className="scanline" />
     </MotionConfig>
   );
 }

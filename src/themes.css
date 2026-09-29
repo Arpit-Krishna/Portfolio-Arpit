@@ -1,0 +1,120 @@
+/*
+  Theme palettes. Every Tailwind colour (ink, accent, zinc, white) reads from these
+  variables, so switching data-theme on <html> re-skins the whole site.
+  Values are space-separated RGB so Tailwind opacity modifiers keep working.
+*/
+:root,
+[data-theme="terminal"] {
+  --ink-950: 11 11 13;
+  --ink-900: 17 17 20;
+  --ink-850: 22 22 26;
+  --ink-800: 28 28 33;
+  --ink-700: 39 39 46;
+  --accent: 95 212 160;
+  --accent-dim: 63 158 118;
+  --overlay: 255 255 255;
+  --fg-50: 250 250 250;
+  --fg-100: 244 244 245;
+  --fg-200: 228 228 231;
+  --fg-300: 212 212 216;
+  --fg-400: 161 161 170;
+  --fg-500: 113 113 122;
+  --fg-600: 82 82 91;
+  --fg-700: 63 63 70;
+  --fg-800: 39 39 42;
+  --fg-900: 24 24 27;
+  --fg-950: 9 9 11;
+  --warn: 252 211 77;
+  --danger: 253 164 175;
+  --info: 125 211 252;
+  --grain: 0.035;
+  --graph-filter: invert(0.92) hue-rotate(180deg);
+  color-scheme: dark;
+}
+
+/* Warm CRT phosphor: amber on brown-black with scanlines. */
+[data-theme="amber"] {
+  --ink-950: 14 11 8;
+  --ink-900: 21 17 12;
+  --ink-850: 27 22 16;
+  --ink-800: 34 28 20;
+  --ink-700: 48 40 29;
+  --accent: 236 168 74;
+  --accent-dim: 180 124 50;
+  --overlay: 255 240 214;
+  --fg-50: 253 246 234;
+  --fg-100: 247 238 222;
+  --fg-200: 234 222 202;
+  --fg-300: 216 202 180;
+  --fg-400: 172 158 136;
+  --fg-500: 128 115 96;
+  --fg-600: 94 83 68;
+  --fg-700: 70 61 50;
+  --fg-800: 44 38 30;
+  --fg-900: 29 24 19;
+  --fg-950: 12 10 8;
+  --warn: 252 211 77;
+  --danger: 253 164 175;
+  --info: 125 211 252;
+  --grain: 0.05;
+  --graph-filter: invert(0.92) hue-rotate(180deg) sepia(0.6);
+  color-scheme: dark;
+}
+
+/* Deep navy with an electric blue accent. */
+[data-theme="ocean"] {
+  --ink-950: 7 11 20;
+  --ink-900: 11 17 30;
+  --ink-850: 15 23 38;
+  --ink-800: 20 29 46;
+  --ink-700: 31 43 64;
+  --accent: 110 170 250;
+  --accent-dim: 70 125 205;
+  --overlay: 222 234 255;
+  --fg-50: 248 250 252;
+  --fg-100: 241 245 249;
+  --fg-200: 226 232 240;
+  --fg-300: 203 213 225;
+  --fg-400: 148 163 184;
+  --fg-500: 104 120 143;
+  --fg-600: 74 88 108;
+  --fg-700: 51 65 85;
+  --fg-800: 30 41 59;
+  --fg-900: 15 23 42;
+  --fg-950: 2 6 23;
+  --warn: 252 211 77;
+  --danger: 253 164 175;
+  --info: 125 211 252;
+  --grain: 0.035;
+  --graph-filter: invert(0.92) hue-rotate(180deg);
+  color-scheme: dark;
+}
+
+/* Light paper theme. The fg scale is inverted so text-zinc-100 still means "strong". */
+[data-theme="paper"] {
+  --ink-950: 247 246 242;
+  --ink-900: 255 255 253;
+  --ink-850: 241 240 235;
+  --ink-800: 233 232 226;
+  --ink-700: 218 216 208;
+  --accent: 14 120 84;
+  --accent-dim: 10 92 64;
+  --overlay: 24 24 22;
+  --fg-50: 20 20 18;
+  --fg-100: 32 32 29;
+  --fg-200: 46 46 42;
+  --fg-300: 62 62 57;
+  --fg-400: 84 84 78;
+  --fg-500: 106 106 99;
+  --fg-600: 124 124 116;
+  --fg-700: 186 186 178;
+  --fg-800: 218 217 210;
+  --fg-900: 234 233 227;
+  --fg-950: 244 243 239;
+  --warn: 176 108 0;
+  --danger: 190 40 64;
+  --info: 18 108 168;
+  --grain: 0.025;
+  --graph-filter: none;
+  color-scheme: light;
+}

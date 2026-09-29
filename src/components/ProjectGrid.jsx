@@ -2,15 +2,20 @@ import { projects } from "../data/projects";
 import SectionHeading from "./SectionHeading";
 import ProjectCard from "./ProjectCard";
 
-// Asymmetric 6-column grid: wide, narrow / narrow, wide. Collapses to one column on mobile.
-const spans = ["lg:col-span-4", "lg:col-span-2", "lg:col-span-2", "lg:col-span-4"];
+// Asymmetric 6-column grid. Three projects: one wide on top, two halves below.
+// Four or more: wide, narrow / narrow, wide. Collapses to one column on mobile.
+const layouts = {
+  3: ["lg:col-span-6 md:col-span-2", "lg:col-span-3", "lg:col-span-3"],
+  default: ["lg:col-span-4", "lg:col-span-2", "lg:col-span-2", "lg:col-span-4"],
+};
 
 export default function ProjectGrid() {
+  const spans = layouts[projects.length] ?? layouts.default;
   return (
     <section id="projects" aria-labelledby="projects-title" className="shell py-24 md:py-36">
-      <SectionHeading index="03" eyebrow="Selected work" id="projects-title" title="Systems I have built and what they changed.">
-        One production service from Cars24 and three public builds. Each card links to a case study with the problem,
-        trade-offs, architecture and results.
+      <SectionHeading index="03" eyebrow="Selected work" id="projects-title" title="Things I have built on my own time.">
+        Personal and academic builds, shipped end to end. Each card links to a case study with the problem, trade-offs,
+        architecture and results. My work at Cars24 is under Experience.
       </SectionHeading>
 
       {projects.length === 0 ? (
@@ -22,7 +27,7 @@ export default function ProjectGrid() {
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
           {projects.map((p, i) => (
             <div key={p.slug} className={spans[i % spans.length]}>
-              <ProjectCard project={p} index={i} featured={spans[i % spans.length] === "lg:col-span-4"} />
+              <ProjectCard project={p} index={i} featured={i === 0} />
             </div>
           ))}
         </div>

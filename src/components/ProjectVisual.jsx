@@ -21,7 +21,7 @@ function TerminalVisual({ visual, metrics = [] }) {
           <motion.p
             key={l.v}
             variants={{ hidden: { opacity: 0, x: -8 }, show: { opacity: 1, x: 0 } }}
-            className={`truncate ${l.t === "ok" ? "text-accent" : l.t === "warn" ? "text-amber-300/80" : "text-zinc-500"}`}
+            className={`truncate ${l.t === "ok" ? "text-accent" : l.t === "warn" ? "text-warn/80" : "text-zinc-500"}`}
           >
             {l.v}
           </motion.p>
@@ -53,7 +53,7 @@ function BudgetVisual() {
     <div className="flex h-full flex-col justify-between bg-ink-950 p-5">
       <div className="flex items-center justify-between">
         <p className="text-xs text-zinc-400">September budgets</p>
-        <span className="rounded-full bg-amber-300/10 px-2 py-0.5 font-mono text-[10px] text-amber-200">1 over limit</span>
+        <span className="rounded-full bg-warn/10 px-2 py-0.5 font-mono text-[10px] text-warn">1 over limit</span>
       </div>
       <div className="mt-4 space-y-3">
         {budgets.map((b, i) => {
@@ -63,7 +63,7 @@ function BudgetVisual() {
             <div key={b.name}>
               <div className="flex justify-between font-mono text-[10px] text-zinc-500">
                 <span>{b.name}</span>
-                <span className={over ? "text-amber-200" : ""}>
+                <span className={over ? "text-warn" : ""}>
                   {b.spent.toLocaleString("en-IN")} / {b.limit.toLocaleString("en-IN")}
                 </span>
               </div>
@@ -74,7 +74,7 @@ function BudgetVisual() {
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 60, damping: 18, delay: 0.1 + i * 0.08 }}
                   style={{ originX: 0 }}
-                  className={`h-full rounded-full ${over ? "bg-amber-300/80" : "bg-accent/80"}`}
+                  className={`h-full rounded-full ${over ? "bg-warn/80" : "bg-accent/80"}`}
                 />
               </div>
             </div>

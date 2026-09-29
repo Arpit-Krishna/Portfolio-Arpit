@@ -6,10 +6,11 @@ import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
 import RepoStars from "./RepoStars";
 import MagneticButton from "./MagneticButton";
+import { useTheme } from "../theme/ThemeContext";
 
 const languageColor = {
-  JavaScript: "bg-amber-300/80",
-  Python: "bg-sky-400/80",
+  JavaScript: "bg-warn/80",
+  Python: "bg-info/80",
   Solidity: "bg-zinc-400",
   Go: "bg-cyan-400/80",
   Java: "bg-orange-400/80",
@@ -65,23 +66,26 @@ function ProfileStats() {
 function ContributionGraph() {
   const [status, setStatus] = useState("loading");
   const user = profile.githubUser;
+  const { theme, themes } = useTheme();
+  const color = themes.find((t) => t.id === theme)?.graph ?? "5fd4a0";
   return (
     <div className="relative">
       {status === "loading" && <div className="skeleton h-[112px] w-full rounded-xl" aria-hidden="true" />}
       {status === "error" ? (
         <div className="flex items-center gap-3 rounded-xl border border-white/[0.06] p-5 text-sm text-zinc-400">
-          <WarningCircle size={18} className="text-amber-300/80" aria-hidden="true" />
+          <WarningCircle size={18} className="text-warn/80" aria-hidden="true" />
           The contribution graph could not load. It is still on the GitHub profile.
         </div>
       ) : (
         <img
-          src={`https://ghchart.rshah.org/5fd4a0/${user}`}
+          key={color}
+          src={`https://ghchart.rshah.org/${color}/${user}`}
           alt={`GitHub contribution graph for ${user} over the last year`}
           loading="lazy"
           decoding="async"
           onLoad={() => setStatus("ready")}
           onError={() => setStatus("error")}
-          className={`w-full rounded-lg [filter:invert(0.92)_hue-rotate(180deg)] ${status === "ready" ? "block" : "hidden"}`}
+          className={`w-full rounded-lg [filter:var(--graph-filter)] ${status === "ready" ? "block" : "hidden"}`}
         />
       )}
     </div>

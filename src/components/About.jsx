@@ -24,7 +24,7 @@ function tenureLabel(iso) {
 export default function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="shell py-24 md:py-36">
-      <SectionHeading index="01" eyebrow="About" id="about-title" title={<>Backend engineer who designs for the failure path first.</>}>
+      <SectionHeading index="01" eyebrow="About" id="about-title" title="Backend engineer who designs for the failure path first.">
         I studied computer science and AI at PSIT Kanpur, then went straight into production payments. Most of my work lives
         where money, partner APIs and SLAs meet, so retries, duplicates and flaky gateways are normal inputs, not edge cases.
       </SectionHeading>
@@ -108,9 +108,9 @@ export default function About() {
               <Lightning size={22} weight="fill" aria-hidden="true" />
             </span>
             <p className="max-w-[80ch] text-base leading-relaxed text-zinc-300">
-              <span className="text-zinc-50">Off the clock:</span> I cleared GATE twice, AIR 3234 in 2024 and AIR 1852 in
-              2025, and I still solve LeetCode for fun, which is how the Knight badge (top 5% globally) happened. At work I
-              mentor interns and read every line an AI assistant writes before it ships.
+              <span className="text-zinc-50">Off the clock:</span> I solve LeetCode for fun, prepare for GATE, and build side
+              projects to try ideas that do not fit a production roadmap. At work I mentor interns and read every line an AI
+              assistant writes before it ships.
             </p>
           </div>
         </Reveal>

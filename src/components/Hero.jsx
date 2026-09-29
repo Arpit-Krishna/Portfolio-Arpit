@@ -5,6 +5,31 @@ import TypingRoles from "./TypingRoles";
 import TerminalCard from "./TerminalCard";
 import MagneticButton from "./MagneticButton";
 import SocialIcon from "./SocialIcon";
+import ScrambleText from "./ScrambleText";
+
+// Name letters drop in one by one, then each letter hops when hovered.
+function KineticName({ text }) {
+  return (
+    <span aria-hidden="true" className="inline-block">
+      {text.split("").map((ch, i) =>
+        ch === " " ? (
+          <span key={i}>&nbsp;</span>
+        ) : (
+          <motion.span
+            key={i}
+            className="inline-block"
+            initial={{ opacity: 0, y: "0.6em", rotateX: -80 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.35 + i * 0.035 }}
+            whileHover={{ y: "-0.12em", color: "rgb(var(--accent))", transition: { type: "spring", stiffness: 400, damping: 12 } }}
+          >
+            {ch}
+          </motion.span>
+        )
+      )}
+    </span>
+  );
+}
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } } };
 const item = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
@@ -22,7 +47,7 @@ export default function Hero() {
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-xl">
           <motion.p variants={item} className="chip w-fit !text-xs">
             <span className="h-1.5 w-1.5 animate-breathe rounded-full bg-accent" aria-hidden="true" />
-            {profile.current.role.split(",")[0]} at {profile.current.company}
+            <ScrambleText text={`${profile.current.role.split(",")[0]} at ${profile.current.company}`} />
           </motion.p>
 
           <motion.h1
@@ -30,7 +55,9 @@ export default function Hero() {
             variants={item}
             className="mt-7 text-4xl font-medium leading-none tracking-tighter text-zinc-50 md:text-6xl"
           >
-            Hi, I&apos;m {profile.name}.
+            <span className="sr-only">Hi, I&apos;m {profile.name}.</span>
+            <span aria-hidden="true">Hi, I&apos;m </span>
+            <KineticName text={`${profile.name}.`} />
           </motion.h1>
 
           <motion.div variants={item} className="mt-5 h-7">
@@ -72,6 +99,10 @@ export default function Hero() {
               <MapPin size={14} aria-hidden="true" />
               {profile.location}
             </p>
+            <p className="hidden font-mono text-xs text-zinc-600 md:block">
+              press <kbd className="rounded border border-white/10 px-1 text-zinc-400">/</kbd> for a terminal,{" "}
+              <kbd className="rounded border border-white/10 px-1 text-zinc-400">t</kbd> for themes
+            </p>
           </motion.div>
         </motion.div>
 
@@ -82,14 +113,6 @@ export default function Hero() {
           className="relative lg:translate-y-6"
         >
           <TerminalCard />
-          <div className="absolute -bottom-6 right-6 hidden rounded-2xl border border-white/[0.08] bg-ink-850/90 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_20px_40px_-20px_rgba(0,0,0,0.7)] backdrop-blur sm:block">
-            <p className="font-mono text-[11px] text-zinc-500">acko_integration.success_rate</p>
-            <p className="mt-1 font-mono text-sm text-zinc-200">
-              <span className="text-zinc-500 line-through">50-60%</span>
-              <span className="mx-2 text-zinc-600">to</span>
-              <span className="text-accent">90%+</span>
-            </p>
-          </div>
         </motion.div>
       </div>
     </section>

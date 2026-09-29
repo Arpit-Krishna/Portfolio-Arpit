@@ -45,6 +45,13 @@ src/
 - **Accessibility.** Skip link, semantic sections with `aria-labelledby`, keyboard-operable tabs (arrow keys), Escape closes the mobile menu, visible focus rings, labels above inputs with inline errors.
 - **Contact form.** Posts to Formspree form `xpwldayp` (the same one the old site used) with client-side validation, loading, success and error states.
 
+## Themes and interactions
+
+- **Themes.** Four palettes live in `src/themes.css` (Terminal, Amber CRT, Deep Ocean, Paper). Every Tailwind colour reads a CSS variable, so a theme is just a new `[data-theme]` block plus an entry in `src/data/themes.js`. The choice persists in `localStorage`, an inline script in `index.html` applies it before first paint, and switching uses a View Transitions circular reveal where supported.
+- **Interactive terminal.** `CommandConsole` opens with Ctrl/Cmd+K, `/` or the nav button. It supports `help`, `projects`, `open <slug>`, `cd <section>`, `theme <name>`, `resume`, `contact`, tab completion and history. Press `t` anywhere to cycle themes.
+- **Text motion.** `ScrambleText` decodes labels on view and on hover, `SplitWords` raises headings word by word, `ScrollLitText` lights a statement as you scroll, and the name in the hero drops in letter by letter. The marquee reacts to scroll speed and direction.
+- **Boot screen.** `BootSequence` plays once per browser session on the home page and skips on any key, click, or reduced-motion setting.
+
 ## Deploy
 
 Vercel picks up the Vite preset automatically (`npm run build`, output `dist`). Pushing to `main` deploys production; every PR gets a preview URL.

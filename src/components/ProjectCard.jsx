@@ -27,9 +27,9 @@ export default function ProjectCard({ project, featured = false, index = 0 }) {
       transition={{ type: "spring", stiffness: 100, damping: 20, delay: (index % 2) * 0.08 }}
       whileHover={{ y: -6 }}
       aria-labelledby={`project-${project.slug}`}
-      className="spotlight group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.07] bg-ink-900 transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(95,212,160,0.25)]"
+      className="spotlight group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.07] bg-ink-900 transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgb(var(--accent)/0.22)]"
     >
-      <ProjectVisual project={project} className={`border-b border-white/[0.06] ${featured ? "aspect-[16/9]" : "aspect-[4/3]"}`} />
+      <ProjectVisual project={project} className={`border-b border-white/[0.06] ${featured ? "aspect-[16/9] lg:aspect-[21/9]" : "aspect-[4/3]"}`} />
 
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="flex items-center justify-between gap-3 font-mono text-[11px] text-zinc-500">

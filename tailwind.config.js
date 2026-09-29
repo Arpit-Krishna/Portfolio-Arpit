@@ -1,3 +1,5 @@
+const v = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
@@ -7,19 +9,27 @@ export default {
         sans: ['"Geist"', "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ['"Geist Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
       },
+      // Every colour reads from a CSS variable so themes can swap the whole palette.
+      // Values live in src/themes.css as space-separated RGB triplets.
       colors: {
         ink: {
-          950: "#0b0b0d",
-          900: "#111114",
-          850: "#16161a",
-          800: "#1c1c21",
-          700: "#27272e",
+          950: v("ink-950"),
+          900: v("ink-900"),
+          850: v("ink-850"),
+          800: v("ink-800"),
+          700: v("ink-700"),
         },
         accent: {
-          DEFAULT: "#5fd4a0",
-          soft: "#5fd4a01a",
-          dim: "#3f9e76",
+          DEFAULT: v("accent"),
+          dim: v("accent-dim"),
         },
+        white: v("overlay"),
+        warn: v("warn"),
+        danger: v("danger"),
+        info: v("info"),
+        zinc: Object.fromEntries(
+          [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((n) => [n, v(`fg-${n}`)])
+        ),
       },
       maxWidth: {
         shell: "1240px",
