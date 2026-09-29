@@ -26,7 +26,7 @@ export const profile = {
     { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/arpit-krishna-028107209" },
     { id: "leetcode", label: "LeetCode", href: "https://leetcode.com/u/ArpitKrishna98" },
   ],
-  responseTime: "I usually reply within one or two working days.",
+  responseTime: "I read and answer every message myself.",
 };
 
 export const stats = [
