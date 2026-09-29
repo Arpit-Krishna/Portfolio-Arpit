@@ -10,10 +10,12 @@ const script = [
   { kind: "json", k: "stack", v: '["Go", "Spring Boot", "React"]' },
   { kind: "json", k: "open_to", v: '["full-time", "freelance"]', last: true },
   { kind: "out", text: "}" },
-  { kind: "cmd", text: "go test ./payments/..." },
-  { kind: "ok", text: "ok   payments/idempotency   0.412s" },
-  { kind: "ok", text: "ok   payments/floodguard    0.287s" },
-  { kind: "ok", text: "ok   payments/webhook       0.198s" },
+  { kind: "cmd", text: "ls ~/projects" },
+  { kind: "out", text: "expensify/  hal-jivi/  medium-clone/" },
+  { kind: "cmd", text: "cat ~/.badges" },
+  { kind: "ok", text: "ok   leetcode     knight, top 5%" },
+  { kind: "ok", text: "ok   gate_2025    AIR 1852" },
+  { kind: "ok", text: "ok   hackerrank   6 star problem solving" },
 ];
 
 function Line({ line }) {
@@ -34,12 +36,12 @@ function Line({ line }) {
     );
   if (line.kind === "ok")
     return (
-      <p>
+      <p className="whitespace-pre">
         <span className="text-accent">ok</span>
         <span className="text-zinc-400">{line.text.slice(2)}</span>
       </p>
     );
-  return <p className="text-zinc-500">{line.text}</p>;
+  return <p className="whitespace-pre text-zinc-500">{line.text}</p>;
 }
 
 function TerminalCard() {
@@ -59,7 +61,7 @@ function TerminalCard() {
   }, [count]);
 
   return (
-    <div className="panel relative overflow-hidden" role="img" aria-label="Terminal showing Arpit's profile as JSON and passing payment service tests">
+    <div className="panel relative overflow-hidden" role="img" aria-label="Terminal showing Arpit's profile as JSON, personal projects and badges">
       <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
         <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
