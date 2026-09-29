@@ -86,7 +86,6 @@ const HOLD = 10000;
 function TerminalCard() {
   const ref = useRef(null);
   const inView = useInView(ref, { margin: "-80px" });
-  const [paused, setPaused] = useState(false);
   const [count, setCount] = useState(0);
   const [round, setRound] = useState(0);
   const script = useMemo(() => [...whoami, ...sessions[round % sessions.length]], [round]);
@@ -97,7 +96,7 @@ function TerminalCard() {
       setCount(script.length);
       return;
     }
-    if (paused || !inView) return;
+    if (!inView) return;
     const done = count >= script.length;
     const next = script[count];
     const delay = done ? HOLD : next?.kind === "cmd" ? CMD_DELAY : count < whoami.length ? 160 : LINE_DELAY;
@@ -109,13 +108,11 @@ function TerminalCard() {
       } else setCount(count + 1);
     }, delay);
     return () => clearTimeout(t);
-  }, [count, script, paused, inView]);
+  }, [count, script, inView]);
 
   return (
     <div
       ref={ref}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       className="panel relative overflow-hidden"
       role="img" aria-label="Terminal showing Arpit's profile as JSON followed by a short playful session">
       <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
@@ -124,8 +121,8 @@ function TerminalCard() {
         <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
         <span className="ml-3 font-mono text-[11px] text-zinc-500">zsh / ~/arpit</span>
         <span className="ml-auto flex items-center gap-1.5 font-mono text-[11px] text-zinc-500">
-          <span className={`h-1.5 w-1.5 rounded-full ${paused ? "bg-warn" : "animate-breathe bg-accent"}`} />
-          {paused ? "paused" : `session ${(round % sessions.length) + 1}/${sessions.length}`}
+          <span className="h-1.5 w-1.5 animate-breathe rounded-full bg-accent" />
+          session {(round % sessions.length) + 1}/{sessions.length}
         </span>
       </div>
       <div className="min-h-[340px] space-y-1 p-5 pb-12 font-mono text-[12.5px] leading-relaxed sm:text-[13px]" aria-hidden="true">
