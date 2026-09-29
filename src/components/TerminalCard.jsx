@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-// Scripted terminal session. Each block is revealed line by line, then loops.
-const script = [
+// Scripted terminal. The whoami block always plays, then one of the short
+// sessions below, a different one on each loop.
+const whoami = [
   { kind: "cmd", text: "curl -s arpit.dev/api/whoami | jq" },
   { kind: "out", text: "{" },
   { kind: "json", k: "name", v: '"Arpit Krishna"' },
@@ -10,13 +11,38 @@ const script = [
   { kind: "json", k: "stack", v: '["Go", "Spring Boot", "React"]' },
   { kind: "json", k: "open_to", v: '["full-time", "freelance"]', last: true },
   { kind: "out", text: "}" },
-  { kind: "cmd", text: "ls ~/projects" },
-  { kind: "out", text: "expensify/  hal-jivi/  medium-clone/" },
-  { kind: "cmd", text: "cat ~/.badges" },
-  { kind: "ok", text: "ok   leetcode     knight, top 5%" },
-  { kind: "ok", text: "ok   gate_2025    AIR 1852" },
-  { kind: "ok", text: "ok   hackerrank   6 star problem solving" },
 ];
+
+const sessions = [
+  [
+    { kind: "cmd", text: "git log --oneline ~/life" },
+    { kind: "git", hash: "e4a1f09", text: "feat: expensify, bills post exactly once" },
+    { kind: "git", hash: "b7c2d31", text: "feat: hal-jivi, MSP pricing on-chain" },
+    { kind: "git", hash: "91f0ae4", text: "chore: cleared GATE, twice" },
+    { kind: "git", hash: "0000001", text: "init: hello, world" },
+  ],
+  [
+    { kind: "cmd", text: "sudo rm -rf ~/bugs" },
+    { kind: "out", text: "[sudo] password for arpit: ********" },
+    { kind: "err", text: "rm: cannot remove '~/bugs': they keep coming back" },
+    { kind: "cmd", text: "git blame ~/bugs" },
+    { kind: "out", text: "arpit  (yesterday)  // TODO: handle this later" },
+  ],
+  [
+    { kind: "cmd", text: "ls ~/projects" },
+    { kind: "out", text: "expensify/  hal-jivi/  medium-clone/" },
+    { kind: "cmd", text: "cat ~/.badges" },
+    { kind: "ok", text: "ok   leetcode    knight, top 5%" },
+    { kind: "ok", text: "ok   gate_2025   AIR 1852" },
+  ],
+  [
+    { kind: "cmd", text: "coffee --brew --strength=deploy" },
+    { kind: "out", text: "grinding beans      [##########] 100%" },
+    { kind: "out", text: "running tests       [##########] 100%" },
+    { kind: "ok", text: "ok   deploy ready. just not on a friday." },
+  ],
+];
+
 
 function Line({ line }) {
   if (line.kind === "cmd")
@@ -34,18 +60,27 @@ function Line({ line }) {
         {!line.last && <span className="text-zinc-500">,</span>}
       </p>
     );
+  if (line.kind === "git")
+    return (
+      <p className="whitespace-pre-wrap">
+        <span className="text-warn/80">{line.hash}</span> <span className="text-zinc-300">{line.text}</span>
+      </p>
+    );
+  if (line.kind === "err") return <p className="text-danger/90">{line.text}</p>;
   if (line.kind === "ok")
     return (
-      <p className="whitespace-pre">
+      <p className="whitespace-pre-wrap">
         <span className="text-accent">ok</span>
         <span className="text-zinc-400">{line.text.slice(2)}</span>
       </p>
     );
-  return <p className="whitespace-pre text-zinc-500">{line.text}</p>;
+  return <p className="whitespace-pre-wrap text-zinc-500">{line.text}</p>;
 }
 
 function TerminalCard() {
   const [count, setCount] = useState(0);
+  const [round, setRound] = useState(0);
+  const script = useMemo(() => [...whoami, ...sessions[round % sessions.length]], [round]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -56,12 +91,17 @@ function TerminalCard() {
     const done = count >= script.length;
     const next = script[count];
     const delay = done ? 4200 : next?.kind === "cmd" ? 900 : 140;
-    const t = setTimeout(() => setCount(done ? 0 : count + 1), delay);
+    const t = setTimeout(() => {
+      if (done) {
+        setRound((r) => r + 1);
+        setCount(0);
+      } else setCount(count + 1);
+    }, delay);
     return () => clearTimeout(t);
-  }, [count]);
+  }, [count, script]);
 
   return (
-    <div className="panel relative overflow-hidden" role="img" aria-label="Terminal showing Arpit's profile as JSON, personal projects and badges">
+    <div className="panel relative overflow-hidden" role="img" aria-label="Terminal showing Arpit's profile as JSON followed by a short playful session">
       <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
         <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
@@ -76,7 +116,7 @@ function TerminalCard() {
         <AnimatePresence initial={false}>
           {script.slice(0, count).map((line, i) => (
             <motion.div
-              key={`${i}-${line.text || line.k}`}
+              key={`${round}-${i}`}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
