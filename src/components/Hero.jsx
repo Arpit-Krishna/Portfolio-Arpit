@@ -113,14 +113,6 @@ export default function Hero() {
           className="relative lg:translate-y-6"
         >
           <TerminalCard />
-          <div className="absolute -bottom-6 right-6 hidden rounded-2xl border border-white/[0.08] bg-ink-850/90 px-4 py-3 shadow-[inset_0_1px_0_rgb(var(--overlay)/0.06),0_20px_40px_-20px_rgba(0,0,0,0.7)] backdrop-blur sm:block">
-            <p className="font-mono text-[11px] text-zinc-500">acko_integration.success_rate</p>
-            <p className="mt-1 font-mono text-sm text-zinc-200">
-              <span className="text-zinc-500 line-through">50-60%</span>
-              <span className="mx-2 text-zinc-600">to</span>
-              <span className="text-accent">90%+</span>
-            </p>
-          </div>
         </motion.div>
       </div>
     </section>

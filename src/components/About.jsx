@@ -108,9 +108,9 @@ export default function About() {
               <Lightning size={22} weight="fill" aria-hidden="true" />
             </span>
             <p className="max-w-[80ch] text-base leading-relaxed text-zinc-300">
-              <span className="text-zinc-50">Off the clock:</span> I cleared GATE twice, AIR 3234 in 2024 and AIR 1852 in
-              2025, and I still solve LeetCode for fun, which is how the Knight badge (top 5% globally) happened. At work I
-              mentor interns and read every line an AI assistant writes before it ships.
+              <span className="text-zinc-50">Off the clock:</span> I solve LeetCode for fun, prepare for GATE, and build side
+              projects to try ideas that do not fit a production roadmap. At work I mentor interns and read every line an AI
+              assistant writes before it ships.
             </p>
           </div>
         </Reveal>

@@ -8,7 +8,6 @@ const script = [
   { kind: "json", k: "name", v: '"Arpit Krishna"' },
   { kind: "json", k: "role", v: '"Backend Engineer @ Cars24"' },
   { kind: "json", k: "stack", v: '["Go", "Spring Boot", "React"]' },
-  { kind: "json", k: "daily_payments", v: "4000" },
   { kind: "json", k: "open_to", v: '["full-time", "freelance"]', last: true },
   { kind: "out", text: "}" },
   { kind: "cmd", text: "go test ./payments/..." },

@@ -10,7 +10,7 @@ export const profile = {
     "API Integration Engineer",
   ],
   intro:
-    "I build payment and integration backends in Go that stay calm when upstream systems do not. At Cars24 I run a challan fulfilment service that handles 3,000 to 4,000 requests a day, and I ship full-stack side projects in React and Spring Boot.",
+    "I build payment and integration backends in Go that stay calm when upstream systems do not. At Cars24 I work on challan payments and partner integrations, and outside work I ship full-stack side projects in React and Spring Boot.",
   location: "Gurugram, India",
   email: "krishnaarpit930@gmail.com",
   resume: "/Arpit_Krishna_Resume.pdf",
@@ -29,11 +29,12 @@ export const profile = {
   responseTime: "I read and answer every message myself.",
 };
 
+// Personal highlights only. Work numbers live in src/data/experience.js.
 export const stats = [
-  { value: 4000, prefix: "", suffix: "", display: "3-4k", label: "payment requests a day through a service I built solo" },
-  { value: 80, prefix: "~", suffix: "%", label: "of those payments settled by an automated bot" },
-  { value: 90, prefix: "", suffix: "%+", label: "Acko integration success rate, up from 50-60%" },
-  { value: 3, prefix: "<", suffix: "s", label: "API latency held for SLA-bound B2B partners" },
+  { value: 1852, prefix: "AIR ", suffix: "", display: "AIR 1852", label: "GATE 2025 in CS and IT, after AIR 3234 in 2024" },
+  { value: 5, prefix: "top ", suffix: "%", label: "LeetCode Knight badge, ranked globally" },
+  { value: 6, prefix: "", suffix: " star", label: "HackerRank problem solving, plus 5 stars in Python and C++" },
+  { value: 3, prefix: "", suffix: "", label: "personal and academic projects shipped end to end" },
 ];
 
 export const achievements = [
