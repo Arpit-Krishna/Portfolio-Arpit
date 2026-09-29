@@ -9,7 +9,7 @@ export default function NotFound({ title = "Page not found", message = "That rou
       <p className="font-mono text-sm text-zinc-500">
         <span className="text-accent">$</span> curl -I {typeof window !== "undefined" ? window.location.pathname : ""}
       </p>
-      <p className="mt-2 font-mono text-sm text-rose-300">HTTP/2 404</p>
+      <p className="mt-2 font-mono text-sm text-danger">HTTP/2 404</p>
       <h1 className="mt-8 text-4xl font-medium tracking-tighter text-zinc-50 md:text-5xl">{title}</h1>
       <p className="mt-4 max-w-[52ch] leading-relaxed text-zinc-400">{message}</p>
       <Link

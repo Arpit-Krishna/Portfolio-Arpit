@@ -27,9 +27,9 @@ function Line({ line }) {
   if (line.kind === "json")
     return (
       <p className="pl-4">
-        <span className="text-sky-300/80">"{line.k}"</span>
+        <span className="text-info/80">"{line.k}"</span>
         <span className="text-zinc-500">: </span>
-        <span className={line.v.startsWith('"') || line.v.startsWith("[") ? "text-amber-200/80" : "text-accent"}>{line.v}</span>
+        <span className={line.v.startsWith('"') || line.v.startsWith("[") ? "text-warn/80" : "text-accent"}>{line.v}</span>
         {!line.last && <span className="text-zinc-500">,</span>}
       </p>
     );

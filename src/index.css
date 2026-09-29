@@ -1,3 +1,5 @@
+@import "./themes.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,10 +8,10 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
-    color-scheme: dark;
   }
   body {
     @apply bg-ink-950 font-sans text-zinc-200 antialiased;
+    transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     font-feature-settings: "ss01", "cv11";
   }
   ::selection {
@@ -33,7 +35,7 @@
     @apply font-mono text-xs uppercase tracking-[0.18em] text-zinc-500;
   }
   .panel {
-    @apply rounded-[1.75rem] border border-white/[0.07] bg-ink-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)];
+    @apply rounded-[1.75rem] border border-white/[0.07] bg-ink-900 shadow-[inset_0_1px_0_rgb(var(--overlay)/0.04)];
   }
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-zinc-400;
@@ -53,14 +55,14 @@
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: var(--grain);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Faint engineering grid used behind the hero. */
 .grid-bg {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-image: linear-gradient(rgb(var(--overlay) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--overlay) / 0.04) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, black 30%, transparent 75%);
 }
@@ -78,7 +80,7 @@
   padding: 1px;
   background: radial-gradient(
     380px circle at var(--mx, 50%) var(--my, 0%),
-    rgba(95, 212, 160, 0.45),
+    rgb(var(--accent) / 0.45),
     transparent 45%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -92,4 +94,49 @@
 .spotlight:hover::before,
 .spotlight:focus-within::before {
   opacity: 1;
+}
+
+/* Amber CRT extras: scanlines, a slow rolling scan bar and a phosphor glow on accent text. */
+.scanline {
+  display: none;
+}
+[data-theme="amber"] .scanline {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 41;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.16) 0 1px, transparent 1px 3px);
+}
+[data-theme="amber"] .scanline::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 18vh;
+  background: linear-gradient(to bottom, transparent, rgb(var(--accent) / 0.035), transparent);
+  animation: scan 7s linear infinite;
+}
+@keyframes scan {
+  from { transform: translateY(-20vh); }
+  to { transform: translateY(100vh); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="amber"] .scanline::after { animation: none; display: none; }
+}
+[data-theme="amber"] .text-accent {
+  text-shadow: 0 0 12px rgb(var(--accent) / 0.35);
+}
+
+/* Circular reveal when switching theme, for browsers with View Transitions. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Outlined display text used by the footer statement. */
+.text-outline {
+  -webkit-text-stroke: 1px rgb(var(--fg-600));
+  color: transparent;
 }

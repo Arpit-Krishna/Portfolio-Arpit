@@ -3,9 +3,9 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const variants = {
   primary:
-    "bg-accent text-ink-950 shadow-[0_10px_30px_-12px_rgba(95,212,160,0.55)] hover:bg-[#6fdcab]",
+    "bg-accent text-ink-950 shadow-[0_10px_30px_-12px_rgb(var(--accent)/0.55)] hover:brightness-110",
   ghost:
-    "border border-white/10 bg-white/[0.03] text-zinc-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] hover:border-white/20 hover:bg-white/[0.06]",
+    "border border-white/10 bg-white/[0.03] text-zinc-100 shadow-[inset_0_1px_0_rgb(var(--overlay)/0.06)] hover:border-white/20 hover:bg-white/[0.06]",
 };
 
 // A button or link that drifts toward the pointer. Motion values keep the effect

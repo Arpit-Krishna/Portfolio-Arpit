@@ -1,4 +1,6 @@
 import Reveal from "./Reveal";
+import SplitWords from "./SplitWords";
+import ScrambleText from "./ScrambleText";
 
 export default function SectionHeading({ index, eyebrow, title, children, id }) {
   return (
@@ -7,10 +9,10 @@ export default function SectionHeading({ index, eyebrow, title, children, id }) 
         <p className="eyebrow flex items-center gap-3">
           <span className="text-accent">{index}</span>
           <span className="h-px w-8 bg-white/15" aria-hidden="true" />
-          {eyebrow}
+          <ScrambleText text={eyebrow} />
         </p>
         <h2 id={id} className="mt-4 text-3xl font-medium leading-[1.05] tracking-tighter text-zinc-50 md:text-5xl">
-          {title}
+          {typeof title === "string" ? <SplitWords text={title} /> : title}
         </h2>
       </Reveal>
       {children && (

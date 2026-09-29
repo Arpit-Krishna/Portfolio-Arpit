@@ -24,7 +24,7 @@ function tenureLabel(iso) {
 export default function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="shell py-24 md:py-36">
-      <SectionHeading index="01" eyebrow="About" id="about-title" title={<>Backend engineer who designs for the failure path first.</>}>
+      <SectionHeading index="01" eyebrow="About" id="about-title" title="Backend engineer who designs for the failure path first.">
         I studied computer science and AI at PSIT Kanpur, then went straight into production payments. Most of my work lives
         where money, partner APIs and SLAs meet, so retries, duplicates and flaky gateways are normal inputs, not edge cases.
       </SectionHeading>

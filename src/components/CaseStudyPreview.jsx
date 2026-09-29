@@ -8,7 +8,7 @@ export default function CaseStudyPreview({ project, label = "Next case study" })
   return (
     <Link
       to={`/work/${project.slug}`}
-      className="group grid overflow-hidden rounded-[1.75rem] border border-white/[0.07] bg-ink-900 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_30px_60px_-30px_rgba(95,212,160,0.25)] md:grid-cols-[1.2fr_1fr]"
+      className="group grid overflow-hidden rounded-[1.75rem] border border-white/[0.07] bg-ink-900 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_30px_60px_-30px_rgb(var(--accent)/0.22)] md:grid-cols-[1.2fr_1fr]"
     >
       <div className="flex flex-col justify-between gap-8 p-7 md:p-10">
         <p className="eyebrow">{label}</p>

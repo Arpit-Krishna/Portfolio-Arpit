@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { List, X, DownloadSimple } from "@phosphor-icons/react";
+import { List, X, DownloadSimple, TerminalWindow } from "@phosphor-icons/react";
 import { navLinks, profile } from "../data/profile";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 // Tracks which home-page section is on screen so the nav can highlight it.
 function useActiveSection(enabled) {
@@ -28,7 +29,7 @@ function useActiveSection(enabled) {
   return active;
 }
 
-export default function Nav() {
+export default function Nav({ onOpenConsole }) {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -72,7 +73,7 @@ export default function Nav() {
           aria-label="Primary"
           className={`mx-auto flex max-w-shell items-center justify-between rounded-full border px-3 py-2 transition-all duration-500 sm:px-4 ${
             scrolled || open
-              ? "border-white/[0.08] bg-ink-900/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_20px_40px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+              ? "border-white/[0.08] bg-ink-900/75 shadow-[inset_0_1px_0_rgb(var(--overlay)/0.06),0_20px_40px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
               : "border-transparent bg-transparent"
           }`}
         >
@@ -109,10 +110,30 @@ export default function Nav() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onOpenConsole}
+              aria-label="Open interactive terminal"
+              aria-keyshortcuts="Control+K"
+              className="group hidden items-center gap-2 rounded-full border border-white/10 py-2 pl-3 pr-2 text-sm text-zinc-300 transition-colors hover:border-accent/40 hover:text-zinc-100 active:scale-[0.98] md:inline-flex"
+            >
+              <TerminalWindow size={16} className="text-accent" aria-hidden="true" />
+              Terminal
+              <kbd className="rounded-md border border-white/10 px-1.5 font-mono text-[10px] text-zinc-500">Ctrl K</kbd>
+            </button>
+            <button
+              type="button"
+              onClick={onOpenConsole}
+              aria-label="Open interactive terminal"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-accent active:scale-[0.96] md:hidden"
+            >
+              <TerminalWindow size={18} aria-hidden="true" />
+            </button>
+            <ThemeSwitcher />
             <a
               href={profile.resume}
               download
-              className="hidden items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-200 transition-colors hover:border-accent/40 hover:text-white active:scale-[0.98] sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-200 transition-colors hover:border-accent/40 hover:text-white active:scale-[0.98] xl:inline-flex"
             >
               <DownloadSimple size={16} aria-hidden="true" />
               Resume
@@ -138,7 +159,7 @@ export default function Nav() {
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              className="mx-auto mt-2 max-w-shell rounded-[1.75rem] border border-white/[0.08] bg-ink-900/95 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl lg:hidden"
+              className="mx-auto mt-2 max-w-shell rounded-[1.75rem] border border-white/[0.08] bg-ink-900/95 p-3 shadow-[inset_0_1px_0_rgb(var(--overlay)/0.06)] backdrop-blur-xl lg:hidden"
             >
               <motion.ul
                 initial="hidden"

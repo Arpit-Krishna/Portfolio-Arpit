@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, Copy, EnvelopeSimple, PaperPlaneTilt, WarningCircle, Clock } from "@phosphor-icons/react";
 import { profile } from "../data/profile";
 import Reveal from "./Reveal";
+import SplitWords from "./SplitWords";
+import ScrambleText from "./ScrambleText";
 import MagneticButton from "./MagneticButton";
 import SocialIcon from "./SocialIcon";
 
@@ -50,7 +52,7 @@ function Field({ id, label, helper, error, children }) {
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="flex items-center gap-1.5 text-sm text-rose-300" role="alert">
+        <p id={`${id}-error`} className="flex items-center gap-1.5 text-sm text-danger" role="alert">
           <WarningCircle size={14} aria-hidden="true" />
           {error}
         </p>
@@ -103,7 +105,7 @@ export default function ContactCTA() {
   };
 
   const borderFor = (field) =>
-    errors[field] ? "border-rose-400/60" : "border-white/[0.08] hover:border-white/15 focus:border-accent/60";
+    errors[field] ? "border-danger/60" : "border-white/[0.08] hover:border-white/15 focus:border-accent/60";
 
   const serverError = state.errors && !state.succeeded;
 
@@ -114,10 +116,10 @@ export default function ContactCTA() {
           <p className="eyebrow flex items-center gap-3">
             <span className="text-accent">06</span>
             <span className="h-px w-8 bg-white/15" aria-hidden="true" />
-            Contact
+            <ScrambleText text="Contact" />
           </p>
           <h2 id="contact-title" className="mt-4 text-3xl font-medium leading-[1.05] tracking-tighter text-zinc-50 md:text-5xl">
-            Interested in working together?
+            <SplitWords text="Interested in working together?" />
           </h2>
 
           <div className="mt-8" role="radiogroup" aria-label="What are you reaching out about?">
@@ -268,7 +270,7 @@ export default function ContactCTA() {
                 </Field>
 
                 {serverError && (
-                  <p className="flex items-start gap-2 rounded-2xl border border-rose-400/30 bg-rose-400/[0.06] px-4 py-3 text-sm text-rose-200" role="alert">
+                  <p className="flex items-start gap-2 rounded-2xl border border-danger/30 bg-danger/[0.06] px-4 py-3 text-sm text-danger" role="alert">
                     <WarningCircle size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
                     The message did not go through. Please try again, or email me at {profile.email}.
                   </p>
