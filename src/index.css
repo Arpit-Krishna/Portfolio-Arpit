@@ -1,53 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  scroll-behavior: smooth;
-  font-family: 'Gabarito', sans-serif;
-}
-body {
-  background-image: url("assets/bg.png");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.portfolio-card {
-  background-color: rgba(128, 128, 128, 0.173);
-}
-
-.gradient-text {
-  background: linear-gradient(white, rgba(134, 78, 173));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.progress-bar::-webkit-progress-bar {
-  border-radius: 15px;
-  border: 1px solid gray;
-  background-color: transparent;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-ink-950 font-sans text-zinc-200 antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-ink-950;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
-.progress-bar::-webkit-progress-value {
-  border-radius: 15px;
-  background: linear-gradient(to right, violet, yellow);
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-4 sm:px-6 lg:px-8;
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-zinc-500;
+  }
+  .panel {
+    @apply rounded-[1.75rem] border border-white/[0.07] bg-ink-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-zinc-400;
+  }
+  .skeleton {
+    @apply relative overflow-hidden bg-white/[0.05];
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/[0.06] to-transparent;
+  }
 }
 
-.scroll-bar::-webkit-scrollbar {
-  width: 5px;
-  background-color: transparent;
+/* Grain lives on a fixed, non-interactive layer so scrolling never repaints it. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.scroll-bar::-webkit-scrollbar-thumb {
-  background-color: rgba(134, 78, 173);
-  border-radius: 20px;
+/* Faint engineering grid used behind the hero. */
+.grid-bg {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, black 30%, transparent 75%);
 }
 
-.scroll-hide::-webkit-scrollbar {
-  display: none;
+/* Cursor-following border highlight for project cards. Position vars are set from JS. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(95, 212, 160, 0.45),
+    transparent 45%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight:hover::before,
+.spotlight:focus-within::before {
+  opacity: 1;
 }

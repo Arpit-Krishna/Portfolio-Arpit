@@ -1,30 +1,25 @@
-import React, { useEffect } from "react";
-import PortfolioCard from "../Components/PortfolioCard";
-import HomeCard from "../Components/HomeCard";
-import AboutCard from "../Components/AboutCard";
-import SkillsSection from "../Components/SkillsSection";
-import ProjectSection from "../Components/ProjectSection";
-import ContactSection from "../Components/ContactSection";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import Hero from "../components/Hero";
+import Marquee from "../components/Marquee";
+import About from "../components/About";
+import SkillsCloud from "../components/SkillsCloud";
+import ProjectGrid from "../components/ProjectGrid";
+import OpenSource from "../components/OpenSource";
+import ExperienceTimeline from "../components/ExperienceTimeline";
+import ContactCTA from "../components/ContactCTA";
+import usePageMeta from "../hooks/usePageMeta";
 
-const Home = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1500,
-    });
-  }, []);
-
+export default function Home() {
+  usePageMeta();
   return (
-    <div className="w-[80vw]  mx-auto">
-      <PortfolioCard />
-      <HomeCard />
-      <AboutCard />
-      <SkillsSection />
-      <ProjectSection />
-      <ContactSection />
-    </div>
+    <>
+      <Hero />
+      <Marquee />
+      <About />
+      <SkillsCloud />
+      <ProjectGrid />
+      <OpenSource />
+      <ExperienceTimeline />
+      <ContactCTA />
+    </>
   );
-};
-
-export default Home;
+}
