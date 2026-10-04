@@ -11,8 +11,8 @@ import {
 } from "framer-motion";
 
 const words = [
-  "Go", "Idempotent webhooks", "Spring Boot", "Circuit breakers", "FastAPI", "Kafka", "PostgreSQL",
-  "Valkey", "React", "Docker", "HMAC signing", "Cloudflare Workers", "Design docs", "Staged rollouts",
+  "Go", "Virtual threads", "Spring Boot", "Circuit breakers", "FastAPI", "Kafka", "PostgreSQL",
+  "Valkey", "React", "Docker", "Resilience4j", "Cloudflare Workers", "Design docs", "Staged rollouts",
 ];
 
 // Endless ticker that speeds up with scroll velocity and flips direction when you scroll up.

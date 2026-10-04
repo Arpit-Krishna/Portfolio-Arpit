@@ -7,16 +7,18 @@ export const experience = [
     end: "Present",
     current: true,
     summary:
-      "Own backend services for challan payments and B2B insurance integrations, from design doc to staged rollout and on-call.",
+      "Own backend services for B2B partner integrations and vehicle data orchestration, from design doc to staged rollout and on-call.",
     highlights: [
-      "Built a Go challan fulfilment service solo that takes 3,000-4,000 requests a day from 4 portals and automates ~80% through a payment bot with idempotent HMAC webhooks.",
-      "Shielded the external payment gateway with a 5-layer anti-flooding stack including cooldowns, daily caps and a circuit breaker, plus TAT-based SLA tracking at every stage.",
+      "Built the Partner Config Parser, a config-driven engine that fans each vehicle RC lookup out to multiple upstream sources in parallel on Java virtual threads, merges results by source priority and validates partner-specific mandatory fields.",
+      "Moved source order, parallel vs serial grouping, timeouts, rollout and rate limits into per-partner JSON ladders, so onboarding a B2B partner or reshuffling sources needs a config change, not a deploy.",
+      "Added a Redis advance cache that lets a cached higher-priority source answer a lower-priority request, cutting live upstream calls.",
+      "Layered graceful degradation with Resilience4j circuit breakers, per-vehicle failure thresholds, rate limits and fallback ladder steps, with every source call logged async to Athena and Elasticsearch.",
       "Rebuilt the Acko client integration after auditing request and response flows, taking success rate from 50-60% to 90%+.",
       "Kept latency under 3 seconds for Acko, Policybazaar, Paytm, Zoop and Go Digit workflows, and resolved P0 incidents in production.",
       "Led backend delivery of PRISM, an issue-reporting platform with dashboards and debugging tools for faster root-cause analysis.",
       "Mentored 3 interns and reviewed every Copilot and Claude generated change before it shipped.",
     ],
-    tech: ["Go", "REST APIs", "HMAC Webhooks", "Caching", "Web Scraping", "Encryption", "Feature Flags"],
+    tech: ["Java", "Virtual Threads", "CompletableFuture", "Redis", "MongoDB", "Resilience4j", "Elasticsearch", "AWS Athena", "Feature Flags"],
   },
   {
     company: "Pranveer Singh Institute of Technology",

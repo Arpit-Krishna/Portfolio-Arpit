@@ -25,8 +25,8 @@ export default function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="shell py-24 md:py-36">
       <SectionHeading index="01" eyebrow="About" id="about-title" title="Backend engineer who designs for the failure path first.">
-        I studied computer science and AI at PSIT Kanpur, then went straight into production payments. Most of my work lives
-        where money, partner APIs and SLAs meet, so retries, duplicates and flaky gateways are normal inputs, not edge cases.
+        I studied computer science and AI at PSIT Kanpur, then went straight into production integrations. Most of my work lives
+        where many partner APIs and upstream sources meet, so retries, timeouts and flaky upstreams are normal inputs, not edge cases.
       </SectionHeading>
 
       <div className="mt-16 grid gap-6 lg:grid-cols-12">

@@ -8,7 +8,7 @@ const whoami = [
   { kind: "out", text: "{" },
   { kind: "json", k: "name", v: '"Arpit Krishna"' },
   { kind: "json", k: "role", v: '"Backend Engineer @ Cars24"' },
-  { kind: "json", k: "stack", v: '["Go", "Spring Boot", "React"]' },
+  { kind: "json", k: "stack", v: '["Java", "Go", "Spring Boot", "React"]' },
   { kind: "json", k: "open_to", v: '["full-time", "freelance"]', last: true },
   { kind: "out", text: "}" },
 ];

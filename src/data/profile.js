@@ -10,7 +10,7 @@ export const profile = {
     "API Integration Engineer",
   ],
   intro:
-    "I build payment and integration backends in Go that stay calm when upstream systems do not. At Cars24 I work on challan payments and partner integrations, and outside work I ship full-stack side projects in React and Spring Boot.",
+    "I build integration backends that stay calm when upstream systems do not. At Cars24 I work on B2B partner integrations and multi-source vehicle data, and outside work I ship full-stack side projects in React and Spring Boot.",
   location: "Gurugram, India",
   email: "krishnaarpit930@gmail.com",
   resume: "/Arpit_Krishna_Resume.pdf",
