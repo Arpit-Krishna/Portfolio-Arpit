@@ -9,10 +9,10 @@ export const experience = [
     summary:
       "Own backend services for B2B partner integrations and vehicle data orchestration, from design doc to staged rollout and on-call.",
     highlights: [
-      "Built the Partner Config Parser, a config-driven engine that fans each vehicle RC lookup out to multiple upstream sources in parallel on Java virtual threads, merges results by source priority and validates partner-specific mandatory fields.",
-      "Moved source order, parallel vs serial grouping, timeouts, rollout and rate limits into per-partner JSON ladders, so onboarding a B2B partner or reshuffling sources needs a config change, not a deploy.",
-      "Added a Redis advance cache that lets a cached higher-priority source answer a lower-priority request, cutting live upstream calls.",
-      "Layered graceful degradation with Resilience4j circuit breakers, per-vehicle failure thresholds, rate limits and fallback ladder steps, with every source call logged async to Athena and Elasticsearch.",
+      "Worked on a config-driven orchestration engine that fans each request out to multiple upstream data providers in parallel (lightweight virtual threads, deadline-based timeouts), merges results by priority and validates required fields into one unified response for B2B partners.",
+      "Helped make partner onboarding a config change rather than a code change: per-partner rule sets define provider priority, parallel vs. fallback steps, timeouts, rollout percentages, rate limits and mandatory fields.",
+      "Contributed to the resilience layer around provider calls: circuit breakers, failure thresholds, per-partner rate limits and daily quotas, gradual rollouts and fallback through backup steps.",
+      "Worked on cross-provider caching in Redis, where a cached result from a higher-priority provider can serve lower-priority requests, cutting live upstream calls and cost.",
       "Rebuilt the Acko client integration after auditing request and response flows, taking success rate from 50-60% to 90%+.",
       "Kept latency under 3 seconds for Acko, Policybazaar, Paytm, Zoop and Go Digit workflows, and resolved P0 incidents in production.",
       "Led backend delivery of PRISM, an issue-reporting platform with dashboards and debugging tools for faster root-cause analysis.",
