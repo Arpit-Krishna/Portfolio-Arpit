@@ -5,7 +5,7 @@ const STEPS = [
   { t: "booting arpit.dev v2026.09", s: "" },
   { t: "loading go runtime", s: "ok" },
   { t: "warming caches (valkey)", s: "ok" },
-  { t: "verifying hmac signatures", s: "ok" },
+  { t: "spawning virtual threads", s: "ok" },
   { t: "arming circuit breakers", s: "ok" },
   { t: "mounting portfolio", s: "ready" },
 ];

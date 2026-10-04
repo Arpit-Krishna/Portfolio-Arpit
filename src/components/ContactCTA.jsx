@@ -27,7 +27,7 @@ const inquiries = [
   {
     id: "consulting",
     label: "Consulting",
-    copy: "Stuck on flaky third-party APIs, retries or duplicate payments? I can review the design and suggest fixes.",
+    copy: "Stuck on flaky third-party APIs, retries or slow upstream sources? I can review the design and suggest fixes.",
     placeholder: "the system, what is going wrong and what you have tried",
   },
 ];
