@@ -41,7 +41,7 @@ export const achievements = [
   { title: "GATE 2025, AIR 1852", detail: "Also qualified GATE 2024 with AIR 3234 in CS and IT." },
   { title: "LeetCode Knight", detail: "Top 5% globally. HackerRank 6-star problem solving, 5-star Python and C++." },
   { title: "GFG Hackathon", detail: "Regional qualifier, run with Google Cloud and AMD." },
-  { title: "TCS iON NQT", detail: "90%+ in IT and psychometric assessments." },
+  { title: "TCS iON NQT", detail: "Cleared the IT and psychometric assessments." },
 ];
 
 export const certifications = [
