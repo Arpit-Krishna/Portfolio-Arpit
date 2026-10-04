@@ -13,7 +13,7 @@ export const experience = [
       "Moved source order, parallel vs serial grouping, timeouts, rollout and rate limits into per-partner JSON ladders, so onboarding a B2B partner or reshuffling sources needs a config change, not a deploy.",
       "Added a Redis advance cache that lets a cached higher-priority source answer a lower-priority request, cutting live upstream calls.",
       "Layered graceful degradation with Resilience4j circuit breakers, per-vehicle failure thresholds, rate limits and fallback ladder steps, with every source call logged async to Athena and Elasticsearch.",
-      "Rebuilt the Acko client integration after auditing request and response flows, fixing the failure paths that were dragging down its success rate.",
+      "Rebuilt the Acko client integration after auditing request and response flows, taking success rate from 50-60% to 90%+.",
       "Kept latency under 3 seconds for Acko, Policybazaar, Paytm, Zoop and Go Digit workflows, and resolved P0 incidents in production.",
       "Led backend delivery of PRISM, an issue-reporting platform with dashboards and debugging tools for faster root-cause analysis.",
       "Mentored 3 interns and reviewed every Copilot and Claude generated change before it shipped.",
